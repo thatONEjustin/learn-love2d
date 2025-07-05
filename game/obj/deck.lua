@@ -1,4 +1,6 @@
+local array = require("lib.array")
 local class = require("lib.middleclass")
+local inspect = require("lib.inspect")
 
 local Stateful = require("lib.stateful")
 local Card = require("game.obj.card")
@@ -9,9 +11,10 @@ Deck:include(Stateful)
 
 local default_rules = Rules:new()
 
-function Deck:initialize(rules)
+function Deck:initialize(rules, deck)
 	local tmp_deck = {}
 
+	-- default rules merging
 	self.rules = default_rules
 
 	if rules ~= nil then
@@ -26,10 +29,16 @@ function Deck:initialize(rules)
 		end
 	end
 
-	self.cards = tmp_deck
+	if deck == nil then
+		-- deck stack
+		self.cards = tmp_deck
+	else
+		self.cards = deck
+	end
 end
 
 function RandomizeTable(tab)
+	-- print(#tab)
 	local len = #tab
 	local r
 	for i = 1, len do
@@ -47,7 +56,24 @@ function Deck:shuffle()
 	self.cards = RandomizeTable(self.cards)
 end
 
-function Deck:draw()
+function Deck:split_deck()
+	print(tostring(#self.cards / 2))
+	local deck_a = {}
+
+	for i = 1, math.floor(#self.cards / 2) do
+		deck_a[i] = self.cards[i]
+	end
+
+	local deck_b = {}
+	for i = 1, math.floor(#self.cards / 2) do
+		local other_half = math.floor(#self.cards / 2) + i
+		deck_b[i] = self.cards[other_half]
+	end
+
+	return deck_a, deck_b
+end
+
+function Deck:draw_card()
 	if #self.cards == 0 then
 		print("deck is empty")
 		return
@@ -61,6 +87,8 @@ function Deck:draw()
 	table.remove(self.cards, #self.cards)
 
 	print("how many left? " .. tostring(#self.cards))
+
+	return c
 end
 
 return Deck

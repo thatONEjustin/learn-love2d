@@ -1,7 +1,7 @@
-local Class = require("lib.middleclass")
+local class = require("lib.middleclass")
 local Stateful = require("lib.stateful")
 
-local Card = Class("Card")
+local Card = class("Card")
 Card:include(Stateful)
 
 function Card:initialize(rank, suit, faces, hidden)
@@ -9,6 +9,9 @@ function Card:initialize(rank, suit, faces, hidden)
 	self.suit = suit
 	self.faces = faces
 	self.hidden = hidden
+
+	-- love.graphics.setColor(255, 255, 255, 1)
+	-- self.background = love.graphics.rectangle("fill", 100, 100, 150, 250, 8, 8, 3)
 end
 
 function Card:display_label()
