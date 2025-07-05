@@ -24,7 +24,8 @@ function love.load()
 
 	game_deck:shuffle()
 
-	-- Buttons:toggleDebug()
+	Buttons:toggleDebug()
+	Buttons:toggleDebug()
 
 	local rect = Buttons:newRect(100, 200, 150, 75)
 	local a, b = game_deck:split_deck()
@@ -54,7 +55,6 @@ function love.draw()
 end
 
 function love.mousepressed(x, y, button, istouch, presses)
-	-- Handle mouse click events by updating button states
 	Buttons:updateMouseClick(x, y, button, istouch, presses)
 end
 
