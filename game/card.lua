@@ -33,6 +33,7 @@ function Card:isHidden()
 	return self.hidden
 end
 
-local CardHidden = Card:addState("hidden")
+-- TODO: Add Flipped state via Stateful
+local Flipped = Card:addState("Flipped")
 
 return Card

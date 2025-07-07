@@ -3,8 +3,8 @@ local class = require("lib.middleclass")
 local inspect = require("lib.inspect")
 
 local Stateful = require("lib.stateful")
-local Card = require("game.obj.card")
-local Rules = require("game.obj.rules")
+local Card = require("game.card")
+local Rules = require("game.rules")
 
 local Deck = class("Deck")
 Deck:include(Stateful)
